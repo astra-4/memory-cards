@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    background: #3a2020;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+.pf {
+    font-family: 'Press Start 2P', monospace;
+}
+
+a {
+    color: #ffd23f;
+}
+
+a:hover {
+    color: #ffe58f;
+}
+
+.game {
+    width: 600px;
+    background: #d63b3b;
+    border: 4px solid #3a2020;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.lvlbox {
+    font-size: 12px;
+    color: #fff;
+}
+
+.expbarwrap {
+    flex: 1;
+    height: 16px;
+    border: 3pxx solid #3a2020;
+    background: #3a2020;
+}
+
+.expbarfill {
+    height: 100%;
+    background: #ffd23f;
+    width: 0%;
+}
+
+.statline {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 12px;
+}
