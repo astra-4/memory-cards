@@ -60,3 +60,33 @@ a:hover {
     color: #fff;
     margin-bottom: 12px;
 }
+
+.board {
+    display: grid;
+    gap: 10px;
+}
+
+.cell {
+    aspect-ratio: 3 / 4;
+    border: 3px solid #3a2020;
+    position: relative;
+    cursor: pointer;
+    background: #3a2020;
+}
+
+.cellface {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.back {
+    color: #ffd23f;
+}
+
+.back pf {
+    font-size: 20px;
+}
