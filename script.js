@@ -104,5 +104,54 @@ function renderBoard() {
         }
 
         flipper.appendChild(back);
+        flipper.appendChild(front);
+        cell.appendChild(flipper);
+        cell.addEventListener("click", function () {
+            handleCardClick(pos);
+        });
+
+        boardEl.appendChild(cell);
+    });
+}
+
+function updateCellClasses() {
+    const cells = boardEl.children;
+    for (let pos = 0; pos < cells.length; poss++) {
+        const cell = cells[pos];
+        cell.classList.toggle("flipped", flippedCells.includes(pos)||matchedCells.includes(pos));
+        cell.classList.toggle("matched", matchedCells.includes(pos));
+    }
+}
+
+function updateStats() {
+    levelText.textContent = level;
+    boardText.textContent = boardNum;
+    movesText.textContent = moves;
+    const needed = expForLevel(level);
+    const pct = Math.min(100, Math.round((exp/needed) *100));
+    expBarFill.style.width = pct + "%";
+}
+
+function handleCardClick(pos) {
+    if (busy) return;
+    if (flippedCells.includes(pos) || matchedCells.includes(pos)) return;
+
+    flippedCells.push(pos);
+    updateCellClasses();
+
+    if (flippedCells.length < 2) return;
+
+    moves ++;
+    busy=true;
+    updateStats();
+
+    const a = flippedCells[0];
+    const b = flippedCells[1];
+    const isMatch = order[a] === order[b];
+
+    setTimeout(function () {
+        if (isMatch) {
+            matchedCells.push(a,b);
+        }
     })
 }
