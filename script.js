@@ -195,3 +195,15 @@ newBoardBtn.addEventListener("click", function() {
     msgEl.textContent = "Find the matching pairs!";
     buildBoard();
 });
+
+restartBtn.addEventListener("click", function () {
+    localStorage.removeItem(SAVE_KEY);
+    level = 1;
+    exp = 0;
+    boardNum = 1;
+    msgEl.textContent = "Find the matching pairs!";
+    buildBoard();
+});
+
+loadProgress();
+buildBoard();
