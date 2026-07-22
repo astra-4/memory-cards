@@ -90,3 +90,38 @@ a:hover {
 .back pf {
     font-size: 20px;
 }
+
+.front {
+    transform: rotateY(180deg);
+}
+
+.front img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.front .placeholder {
+    font-size: 10px;
+    text-align: center;
+}
+
+.flipper {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transition: transform .35s;
+}
+
+.cell.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+.cell.matched {
+    cursor: default;
+}
+
+.cell.matched .flipper {
+    opacity: 0.55s;
+}
