@@ -152,6 +152,46 @@ function handleCardClick(pos) {
     setTimeout(function () {
         if (isMatch) {
             matchedCells.push(a,b);
+            const boardDone = matchedCells.length === order.length;
+
+            exp +=15;
+            levelUpIfReady();
+
+            if (boardDone) {
+                exp += 30;
+                levelUpIfReady();
+                boardNum++;
+                msgEl.textContent = "Board cleared! New board unlocked.";
+                saveProgress();
+                flippedCells = [];
+                busy = false;
+                buildBoard();
+                return;
+            }
+
+            msgEl.textContent = "Match found!";
+            saveProgress();
+        } else {
+            msgEl.textContent = "Not a match, try again.";
         }
-    })
+
+        flippedCells=[];
+        busy = false;
+        updateCellClasses();
+        updateStats();
+    }, 700);
 }
+
+function levelUpIfReady() {
+    let needed = expForLevel(level);
+    while (exp >= needed) {
+        exp -= needed;
+        level ++;
+        needed = expForLevel(level);
+    }
+}
+
+newBoardBtn.addEventListener("click", function() {
+    msgEl.textContent = "Find the matching pairs!";
+    buildBoard();
+});
