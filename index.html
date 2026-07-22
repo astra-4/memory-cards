@@ -9,6 +9,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="game">
+        <div class="topbar">
+            <div class="lvlbox pf">LVL <span id="levelText">1</span></div>
+            <div class="expbarwrap">
+                <div class="expbarfill" id="expBarFill"></div>
+            </div>
+            <div class="lvlbox pf">EXP</div>
+        </div>
 
+        <div class="statline">
+            <span>Board <span id="boardText">1</span></span>
+            <span>Moves: <span id="movesText">0</span></span>
+        </div>
+
+        <div class="board" id="board"></div>
+
+        <div class="msg" id="msg">Find the matching pairs!</div>
+
+        <div class="btnrow">
+            <button id="newBoardBtn">New Board</button>
+            <button id="restartBtn">Restart</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
