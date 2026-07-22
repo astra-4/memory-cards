@@ -43,7 +43,7 @@ a:hover {
 .expbarwrap {
     flex: 1;
     height: 16px;
-    border: 3pxx solid #3a2020;
+    border: 3px solid #3a2020;
     background: #3a2020;
 }
 
