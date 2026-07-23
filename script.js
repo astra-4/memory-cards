@@ -1,13 +1,13 @@
 //only 8 sprites or else page gets too cramped
 const SPRITE_URLS = [
-    "https://ibb.co/8hj2Fnp",
-    "https://ibb.co/s9pcd8Cx",
-    "https://ibb.co/zcJr2Rg",
-    "https://ibb.co/WvftY6qM",
-    "https://ibb.co/JFSCcNK5",
-    "https://ibb.co/0RbQmtFM",
-    "https://ibb.co/1JLGTKFz",
-    "https://ibb.co/FbfVVB1c"
+    "https://i.ibb.co/kdh0YVf/f3a696c67242ec651f0846f6c145b22b-removebg-preview.png",
+    "https://i.ibb.co/ZzRvpqS4/images-removebg-preview.png",
+    "https://i.ibb.co/yTSXkyC/2f8a81c287de453e9ba20acf755cf774-removebg-preview.png",
+    "https://i.ibb.co/qYp5PdXc/9f8cf76d370e734fcd3f8b76adfc318f-removebg-preview.png",
+    "https://i.ibb.co/QjxXJZfr/83bd5a3573ef4731d4d7fcbcf2d610a6-removebg-preview.png",
+    "https://i.ibb.co/DH2Lzp8C/268-2684062-ash-greninja-pokemon-greninja-ash-pixel-art-removebg-preview.png",
+    "https://i.ibb.co/TqkMtR9W/2f2cf19887a68ccac484f0db892cb4ec-removebg-preview.png",
+    "https://i.ibb.co/1fp669NB/images-removebg-preview-1.png"
 ];
 const SAVE_KEY = "pokemonMemoryCardSave67";
 
