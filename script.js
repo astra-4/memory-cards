@@ -1,5 +1,5 @@
 //only 8 sprites or else page gets too cramped
-const SPRITE_URLS = [];
+const SPRITE_URLS = [src="https://ibb.co/8hj2Fnp", src="https://ibb.co/s9pcd8Cx", src="https://ibb.co/zcJr2Rg", src="https://ibb.co/WvftY6qM", src="https://ibb.co/JFSCcNK5", src="https://ibb.co/0RbQmtFM", src="https://ibb.co/1JLGTKFz", src="https://ibb.co/FbfVVB1c"];
 const SAVE_KEY = "pokemonMemoryCardSave67";
 
 let level = 1;
@@ -50,7 +50,7 @@ function shuffledOrder(pairs) {
     for (let i=idx.length-1; i>0; i--) {
         const j = Math.floor(Math.random() * (i+1));
         const temp = idx[i];
-        idex[i]=idx[j];
+        idx[i]=idx[j];
         idx[j]=temp;
     }
     return idx;
@@ -67,9 +67,9 @@ function buildBoard() {
 }
 
 function renderBoard() {
-    boardEl.innerHTML = "";
-    const cols = Math.cell(Math.sqrt(order.length));
-    boardEl.style.gridTemplateColumns = "repeat (" + cols + ", lfr)";
+    boardE1.innerHTML = "";
+    const cols = Math.ceil(Math.sqrt(order.length));
+    boardE1.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
 
     order.forEach(function (spriteIndex, pos) {
         const cell = document.createElement("div");
@@ -110,13 +110,13 @@ function renderBoard() {
             handleCardClick(pos);
         });
 
-        boardEl.appendChild(cell);
+        boardE1.appendChild(cell);
     });
 }
 
 function updateCellClasses() {
-    const cells = boardEl.children;
-    for (let pos = 0; pos < cells.length; poss++) {
+    const cells = boardE1.children;
+    for (let pos = 0; pos < cells.length; pos++) {
         const cell = cells[pos];
         cell.classList.toggle("flipped", flippedCells.includes(pos)||matchedCells.includes(pos));
         cell.classList.toggle("matched", matchedCells.includes(pos));
