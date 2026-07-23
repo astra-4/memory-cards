@@ -1,5 +1,14 @@
 //only 8 sprites or else page gets too cramped
-const SPRITE_URLS = [src="https://ibb.co/8hj2Fnp", src="https://ibb.co/s9pcd8Cx", src="https://ibb.co/zcJr2Rg", src="https://ibb.co/WvftY6qM", src="https://ibb.co/JFSCcNK5", src="https://ibb.co/0RbQmtFM", src="https://ibb.co/1JLGTKFz", src="https://ibb.co/FbfVVB1c"];
+const SPRITE_URLS = [
+    "https://ibb.co/8hj2Fnp",
+    "https://ibb.co/s9pcd8Cx",
+    "https://ibb.co/zcJr2Rg",
+    "https://ibb.co/WvftY6qM",
+    "https://ibb.co/JFSCcNK5",
+    "https://ibb.co/0RbQmtFM",
+    "https://ibb.co/1JLGTKFz",
+    "https://ibb.co/FbfVVB1c"
+];
 const SAVE_KEY = "pokemonMemoryCardSave67";
 
 let level = 1;
