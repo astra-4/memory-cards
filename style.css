@@ -246,3 +246,46 @@ button:hover {
     color: #ffd23f;
     text-shadow: 3px 3px 0 #3a2020;
 }
+
+.dexPanel {
+    margin-top: 16px;
+    border-top: 3px solid #3a2020;
+    padding-top: 12px;
+}
+
+.dexTitle {
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.dexGrid {
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    gap: 8px;
+}
+
+.dexSlot {
+    aspect-ratio: 1;
+    border: 3px solid #3a2020;
+    background: #3a2020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dexSlot img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.dexSlot.locked {
+    background: #5c3d3d;
+}
+
+.dexSlot .pf {
+    color: #ffd23f;
+    font-size: 14px;
+}

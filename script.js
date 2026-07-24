@@ -23,6 +23,7 @@ let besttimes = {};
 let timerStarted = false;
 let timerInterval = null;
 let elapsedSeconds = 0;
+let seenSprites = [];
 
 const boardE1 = document.getElementById("board");
 const levelText = document.getElementById("levelText");
@@ -40,6 +41,7 @@ const hardBtn = document.getElementById("hardBtn");
 const timerText = document.getElementById("timerText");
 const bestTimeText = document.getElementById("bestTimeText");
 const levelUpOverlay = document.getElementById("levelUpOverlay");
+const dexGrid = document.getElementById("dexGrid");
 
 function pairsForLevel(lvl) {
     return Math.min(lvl+1, SPRITE_URLS.length);
@@ -56,11 +58,12 @@ function loadProgress() {
         exp = saved.exp ||0;
         boardNum = saved.boardNum ||1;
         bestTimes = saved.bestTimes || {};
+        seenSprites = saved.seenSprites || [];
     }
 }
 
 function saveProgress() {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes, seenSprites }));
 }
 
 function shuffledOrder(pairs) {
@@ -168,6 +171,27 @@ function renderBoard() {
         });
 
         boardE1.appendChild(cell);
+    });
+}
+
+function renderDex() {
+    dexGrid.innerHTML = "";
+    SPRITE_URLS.forEach(function (url, i) {
+        const slot = document.createElement("div");
+        const isSeen = seenSprites.includes(i);
+        slot.className = "dexSlot" + (isSeen ? "" : " locked");
+        if (isSeen && url !== "###") {
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = "";
+            slot.appendChild(img);
+        } else {
+            const q = document.createElement("div");
+            q.className = "pf";
+            q.textContent = "?";
+            slot.appendChild(q);
+        }
+        dexGrid.appendChild(slot);
     });
 }
 
