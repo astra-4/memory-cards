@@ -10,6 +10,11 @@ const SPRITE_URLS = [
     "https://i.ibb.co/1fp669NB/images-removebg-preview-1.png"
 ];
 const SAVE_KEY = "pokemonMemoryCardSave67";
+const SKIN_COLORS = {
+    red: "#3a2020",
+    blue: "#1c2b4a",
+    green: "#1f3a26"
+};
 
 let level = 1;
 let exp = 0;
@@ -23,6 +28,7 @@ let besttimes = {};
 let timerStarted = false;
 let timerInterval = null;
 let elapsedSeconds = 0;
+let currentSkin = "red";
 let seenSprites = [];
 
 const boardE1 = document.getElementById("board");
@@ -41,6 +47,7 @@ const hardBtn = document.getElementById("hardBtn");
 const timerText = document.getElementById("timerText");
 const bestTimeText = document.getElementById("bestTimeText");
 const levelUpOverlay = document.getElementById("levelUpOverlay");
+const skinSwatches = document.querySelectorAll(".skinSwatch");
 const dexGrid = document.getElementById("dexGrid");
 
 function pairsForLevel(lvl) {
@@ -51,6 +58,13 @@ function expForLevel(lvl) {
     return 100 + (lvl-1) * 40;
 }
 
+function applySkin() {
+    document.querySelector(".game").style.setProperty("--skinColor",SKIN_COLORS[currentSkin]);
+    skinSwatches.forEach(function (swatch) {
+        swatch.classList.toggle("selected", swatch.dataset.skin === currentSkin);
+    });
+}
+
 function loadProgress() {
     const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
     if (saved) {
@@ -58,12 +72,13 @@ function loadProgress() {
         exp = saved.exp ||0;
         boardNum = saved.boardNum ||1;
         bestTimes = saved.bestTimes || {};
+        currentSkin = saved.skin || "red";
         seenSprites = saved.seenSprites || [];
     }
 }
 
 function saveProgress() {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes, seenSprites }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes, seenSprites, skin: currentSkin }));
 }
 
 function shuffledOrder(pairs) {
@@ -327,5 +342,14 @@ hardBtn.addEventListener("click", function () {
     startGame(5);
 });
 
+skinSwatches.forEach(function (swatch) {
+    swatch.addEventListener("click", function () {
+        currentSkin = swatch.dataset.skin;
+        applySkin();
+        saveProgress();
+    });
+});
+
 loadProgress();
+applySkin();
 gameScreen.style.display = "none";
