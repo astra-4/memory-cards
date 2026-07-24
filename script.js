@@ -113,6 +113,7 @@ function buildBoard() {
     clearInterval(timerInterval);
     timerText.textContent = "0:00";
     renderBoard();
+    renderDex();
     updateStats();
     updateBestTimeDisplay();
 }
@@ -244,6 +245,11 @@ function handleCardClick(pos) {
     setTimeout(function () {
         if (isMatch) {
             matchedCells.push(a,b);
+            const spriteIndex = order[a];
+            if (!seenSprites.includes(spriteIndex)) {
+                seenSprites.push(spriteIndex);
+                renderDex();
+            }
             const boardDone = matchedCells.length === order.length;
 
             const levelBefore = level;
