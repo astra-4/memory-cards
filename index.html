@@ -9,7 +9,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game">
+    <div id="startScreen" class="start-screen">
+        <div class="start-box">
+            <h1 class="pf startTitle">Pokemon Memory Cards!</h1>
+            <p class="startSub">pick a difficulty to begin</p>
+            <div class="diffRow">
+                <button id="easyBtn" class="diffBtn">Easy</button>
+                <button id="mediumBtn" class="diffBtn">Medium</button>
+                <button id="hardBtn" class="diffBtn">Hard</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game" id="gameScreen">
         <div class="topbar">
             <div class="lvlbox pf">LVL <span id="levelText">1</span></div>
             <div class="expbarwrap">
