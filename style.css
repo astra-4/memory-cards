@@ -74,6 +74,11 @@ a:hover {
     background: var(--skinColor, #312020);
 }
 
+.cell:focus {
+    outline: 3px solid #ffd23f;
+    outline-offset: 2px;
+}
+
 .cellface {
     position: absolute;
     inset: 0;

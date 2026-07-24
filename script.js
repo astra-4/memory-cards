@@ -30,6 +30,7 @@ let timerInterval = null;
 let elapsedSeconds = 0;
 let currentSkin = "red";
 let seenSprites = [];
+let focusedPos = 0;
 
 const boardE1 = document.getElementById("board");
 const levelText = document.getElementById("levelText");
@@ -151,6 +152,7 @@ function renderBoard() {
         const cell = document.createElement("div");
         cell.className = "cell";
         cell.dataset.pos = pos;
+        cell.tabIndex = 0;
 
         const flipper = document.createElement("div");
         flipper.className = "flipper";
@@ -183,6 +185,7 @@ function renderBoard() {
         flipper.appendChild(front);
         cell.appendChild(flipper);
         cell.addEventListener("click", function () {
+            focusedPos = pos;
             handleCardClick(pos);
         });
 
@@ -227,6 +230,20 @@ function updateStats() {
     const needed = expForLevel(level);
     const pct = Math.min(100, Math.round((exp/needed) *100));
     expBarFill.style.width = pct + "%";
+}
+
+function moveFocus(dx, dy) {
+    const cols = Math.cell(Math.sqrt(order.length));
+    const rows = Math.cell(order.length / cols);
+    let row = Math.floor(focusedPos / cols);
+    let col = focusedPos % cols;
+    row = Math.min(rows-1,Math.max(0,row+dy));
+    col = Math.min(cols-1, Math.max(0,col+dx));
+    const newPos = row * cols + col;
+    if (newPos >= 0 && newPos < order.length) {
+        focusedPos = newPos;
+        boardE1.children[focusedPos].focus();
+    }
 }
 
 function handleCardClick(pos) {
@@ -348,6 +365,31 @@ skinSwatches.forEach(function (swatch) {
         applySkin();
         saveProgress();
     });
+});
+
+document.addEventListener("keydown", function (e) {
+    if (gameScreen.style.display === "none")
+        return;
+    if (e.key === "ArrowLeft") {
+        moveFocus(-1,0);
+        e.preventDefault();
+    }
+    if (e.key === "ArrowRight") {
+        moveFocus(1,0);
+        e.preventDefault();
+    }
+    if (e.key === "ArrowUp") {
+        moveFocus(0,-1);
+        e.preventDefault();
+    }
+    if (e.key === "ArrowDown") {
+        moveFocus(0,1);
+        e.preventDefault();
+    }
+    if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleCardClick(focusedPos);
+    }
 });
 
 loadProgress();
