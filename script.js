@@ -28,6 +28,11 @@ const expBarFill = document.getElementById("expBarFill");
 const msgEl = document.getElementById("msg");
 const newBoardBtn = document.getElementById("newBoardBtn");
 const restartBtn = document.getElementById("restartBtn");
+const startScreen = document.getElementById("startScreen");
+const gameScreen = document.getElementById("gameScreen");
+const easyBtn = document.getElementById("easyBtn");
+const mediumBtn = document.getElementById("mediumBtn");
+const hardBtn = document.getElementById("hardBtn");
 
 function pairsForLevel(lvl) {
     return Math.min(lvl+1, SPRITE_URLS.length);
@@ -73,6 +78,15 @@ function buildBoard() {
     busy=false;
     renderBoard();
     updateStats();
+}
+
+function startGame(startLevel) {
+    level = startLevel;
+    exp = 0;
+    boardNum = 1;
+    startScreen.style.display = "none";
+    gameScreen.style.display = "block";
+    buildBoard();
 }
 
 function renderBoard() {
@@ -207,12 +221,21 @@ newBoardBtn.addEventListener("click", function() {
 
 restartBtn.addEventListener("click", function () {
     localStorage.removeItem(SAVE_KEY);
-    level = 1;
-    exp = 0;
-    boardNum = 1;
-    msgEl.textContent = "Find the matching pairs!";
-    buildBoard();
+    startScreen.style.display = "flex";
+    gameScreen.style.display = "none";
+});
+
+easyBtn.addEventListener("click", function() {
+    startGame(1);
+});
+
+mediumBtn.addEventListener("click", function () {
+    startGame(3);
+});
+
+hardBtn.addEventListener("click", function () {
+    startGame(5);
 });
 
 loadProgress();
-buildBoard();
+gameScreen.style.display = "none";
