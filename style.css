@@ -146,6 +146,11 @@ a:hover {
     margin-top: 10px;
 }
 
+.paused .cell {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 button {
     font-family: 'Press Start 2P', monospace;
     font-size: 10px;
