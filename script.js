@@ -206,6 +206,16 @@ function handleCardClick(pos) {
     const b = flippedCells[1];
     const isMatch = order[a] === order[b];
 
+    if (!isMatch) {
+        const cells = boardE1.children;
+        cells[a].classList.add("shake");
+        cells[b].classList.add("shake");
+        setTimeout(function() {
+            cells[a].classList.remove("shake");
+            cells[b].classList.remove("shake");
+        }, 400);
+    }
+
     setTimeout(function () {
         if (isMatch) {
             matchedCells.push(a,b);
