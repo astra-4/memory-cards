@@ -54,11 +54,12 @@ function loadProgress() {
         level = saved.level || 1;
         exp = saved.exp ||0;
         boardNum = saved.boardNum ||1;
+        bestTimes = saved.bestTimes || {};
     }
 }
 
 function saveProgress() {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes }));
 }
 
 function shuffledOrder(pairs) {
@@ -76,14 +77,40 @@ function shuffledOrder(pairs) {
     return idx;
 }
 
+function formatTime(totalSeconds) {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return mins + ":" + (sec < 10 ? "0" : "") + secs;
+}
+
+function updateBestTimeDisplay() {
+    const pairs = order.length / 2;
+    const bset = bestTimes[pairs];
+    bestTimeText.textContent = best === undefined ? "--:--" : formatTime(best);
+}
+
+function startTimerIfNeeded() {
+    if (timerStarted) return;
+    timerStarted = true;
+    timerInterval = setInterval (function () {
+        elapsedSeconds++;
+        timerText.textContent = formatTime(elapsedSeconds);
+    }, 1000);
+}
+
 function buildBoard() {
     order = shuffledOrder(pairsForLevel(level));
     flippedCells = [];
     matchedCells = [];
     moves = 0;
     busy=false;
+    timerStarted = false;
+    elapsedSeconds = 0;
+    clearInterval(timerInterval);
+    timerText.textContent = "0:00";
     renderBoard();
     updateStats();
+    updateBestTimeDisplay();
 }
 
 function startGame(startLevel) {
@@ -162,6 +189,7 @@ function updateStats() {
 }
 
 function handleCardClick(pos) {
+    startTimerIfNeeded();
     if (busy) return;
     if (flippedCells.includes(pos) || matchedCells.includes(pos)) return;
 
@@ -187,6 +215,11 @@ function handleCardClick(pos) {
             levelUpIfReady();
 
             if (boardDone) {
+                clearInterval(timerInterval);
+                const pairs = order.length / 2;
+                if (bestTimes[pairs]===undefiend || elapsedSeconds < bestTimes[pairs]) {
+                    bestTimes[pairs] = elapsedSeconds;
+                }
                 exp += 30;
                 levelUpIfReady();
                 boardNum++;
