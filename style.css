@@ -71,7 +71,7 @@ a:hover {
     border: 3px solid #3a2020;
     position: relative;
     cursor: pointer;
-    background: #3a2020;
+    background: var(--skinColor, #312020);
 }
 
 .cellface {
@@ -245,6 +245,42 @@ button:hover {
     font-size: 28px;
     color: #ffd23f;
     text-shadow: 3px 3px 0 #3a2020;
+}
+
+.skinRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.skinLabel {
+    color: #fff;
+    font-size: 10px;
+}
+
+.skinSwatch {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #3a2020;
+    cursor: poitner;
+    padding: 0;
+}
+
+.skinSwatch[data-skin="red"] {
+    background: #3a2020;
+}
+
+.skinSwatch[data-skin = "blue"] {
+    background: #1c2b4a;
+}
+
+.skinSwatch[data-skin = "green"] {
+    background: #1f3a26;
+}
+
+.skinSwatch.selected {
+    border-color: #ffd23f;
 }
 
 .dexPanel {
