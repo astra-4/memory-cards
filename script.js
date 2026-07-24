@@ -39,6 +39,7 @@ const mediumBtn = document.getElementById("mediumBtn");
 const hardBtn = document.getElementById("hardBtn");
 const timerText = document.getElementById("timerText");
 const bestTimeText = document.getElementById("bestTimeText");
+const levelUpOverlay = document.getElementById("levelUpOverlay");
 
 function pairsForLevel(lvl) {
     return Math.min(lvl+1, SPRITE_URLS.length);
@@ -221,6 +222,7 @@ function handleCardClick(pos) {
             matchedCells.push(a,b);
             const boardDone = matchedCells.length === order.length;
 
+            const levelBefore = level;
             exp +=15;
             levelUpIfReady();
 
@@ -237,12 +239,14 @@ function handleCardClick(pos) {
                 saveProgress();
                 flippedCells = [];
                 busy = false;
+                if (level > levelBefore) showLevelUpOverlay();
                 buildBoard();
                 return;
             }
 
             msgEl.textContent = "Match found!";
             saveProgress();
+            if (level > levelBefore) showLevelUpOverlay();
         } else {
             msgEl.textContent = "Not a match, try again.";
         }
@@ -261,6 +265,13 @@ function levelUpIfReady() {
         level ++;
         needed = expForLevel(level);
     }
+}
+
+function showLevelUpOverlay() {
+    levelUpOverlay.classList.add("show");
+    setTimeout(function () {
+        levelUpOverlay.classList.remove("show");
+    }, 1200);
 }
 
 newBoardBtn.addEventListener("click", function() {
