@@ -31,6 +31,7 @@ let elapsedSeconds = 0;
 let currentSkin = "red";
 let seenSprites = [];
 let focusedPos = 0;
+let isPaused = false;
 
 const boardE1 = document.getElementById("board");
 const levelText = document.getElementById("levelText");
@@ -39,6 +40,7 @@ const movesText = document.getElementById("movesText");
 const expBarFill = document.getElementById("expBarFill");
 const msgEl = document.getElementById("msg");
 const newBoardBtn = document.getElementById("newBoardBtn");
+const pauseBtn = document.getElementById("pauseBtn");
 const restartBtn = document.getElementById("restartBtn");
 const startScreen = document.getElementById("startScreen");
 const gameScreen = document.getElementById("gameScreen");
@@ -247,6 +249,8 @@ function moveFocus(dx, dy) {
 }
 
 function handleCardClick(pos) {
+    if (isPaused)
+        return;
     startTimerIfNeeded();
     if (busy) return;
     if (flippedCells.includes(pos) || matchedCells.includes(pos)) return;
@@ -389,6 +393,20 @@ document.addEventListener("keydown", function (e) {
     if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         handleCardClick(focusedPos);
+    }
+});
+
+pauseBtn.addEventListener("click", function() {
+    isPaused = !isPaused;
+    pauseBtn.textContent = isPaused ? "Resume" : "Pause";
+    document.querySelector(".game").classList.toggle("paused", isPaused);
+    if (isPaused) {
+        clearInterval(timerInterval);
+    } else if (timerStarted) {
+        timerInterval = setInterval(function () {
+            elapsedSeconds++;
+            timerText.textContent = formatTime(elapsedSeconds);
+        }, 1000);
     }
 });
 
