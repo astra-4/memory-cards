@@ -268,7 +268,7 @@ button:hover {
     width: 30px;
     height: 30px;
     border: 3px solid #3a2020;
-    cursor: poitner;
+    cursor: pointer;
     padding: 0;
 }
 
@@ -276,11 +276,11 @@ button:hover {
     background: #3a2020;
 }
 
-.skinSwatch[data-skin = "blue"] {
+.skinSwatch[data-skin="blue"] {
     background: #1c2b4a;
 }
 
-.skinSwatch[data-skin = "green"] {
+.skinSwatch[data-skin="green"] {
     background: #1f3a26;
 }
 

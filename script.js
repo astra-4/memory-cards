@@ -24,7 +24,7 @@ let order = [];
 let flippedCells = [];
 let matchedCells = [];
 let busy = false;
-let besttimes = {};
+let bestTimes = {};
 let timerStarted = false;
 let timerInterval = null;
 let elapsedSeconds = 0;
@@ -100,12 +100,12 @@ function shuffledOrder(pairs) {
 function formatTime(totalSeconds) {
     const mins = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
-    return mins + ":" + (sec < 10 ? "0" : "") + secs;
+    return mins + ":" + (secs < 10 ? "0" : "") + secs;
 }
 
 function updateBestTimeDisplay() {
     const pairs = order.length / 2;
-    const bset = bestTimes[pairs];
+    const best = bestTimes[pairs];
     bestTimeText.textContent = best === undefined ? "--:--" : formatTime(best);
 }
 
@@ -233,8 +233,8 @@ function updateStats() {
 }
 
 function moveFocus(dx, dy) {
-    const cols = Math.cell(Math.sqrt(order.length));
-    const rows = Math.cell(order.length / cols);
+    const cols = Math.ceil(Math.sqrt(order.length));
+    const rows = Math.ceil(order.length / cols);
     let row = Math.floor(focusedPos / cols);
     let col = focusedPos % cols;
     row = Math.min(rows-1,Math.max(0,row+dy));
@@ -291,7 +291,7 @@ function handleCardClick(pos) {
             if (boardDone) {
                 clearInterval(timerInterval);
                 const pairs = order.length / 2;
-                if (bestTimes[pairs]===undefiend || elapsedSeconds < bestTimes[pairs]) {
+                if (bestTimes[pairs]===undefined || elapsedSeconds < bestTimes[pairs]) {
                     bestTimes[pairs] = elapsedSeconds;
                 }
                 exp += 30;
