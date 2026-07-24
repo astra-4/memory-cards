@@ -39,6 +39,7 @@ const boardText = document.getElementById("boardText");
 const movesText = document.getElementById("movesText");
 const expBarFill = document.getElementById("expBarFill");
 const msgEl = document.getElementById("msg");
+const discoverToast = document.getElementById("discoverToast");
 const newBoardBtn = document.getElementById("newBoardBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const restartBtn = document.getElementById("restartBtn");
@@ -216,6 +217,13 @@ function renderDex() {
     });
 }
 
+function showDiscoverToast() {
+    discoverToast.classList.add("show");
+    setTimeout(function() {
+        discoverToast.classList.remove("show");
+    }, 1500);
+}
+
 function updateCellClasses() {
     const cells = boardE1.children;
     for (let pos = 0; pos < cells.length; pos++) {
@@ -285,6 +293,7 @@ function handleCardClick(pos) {
             if (!seenSprites.includes(spriteIndex)) {
                 seenSprites.push(spriteIndex);
                 renderDex();
+                showDiscoverToast();
             }
             const boardDone = matchedCells.length === order.length;
 

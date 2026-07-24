@@ -139,6 +139,20 @@ a:hover {
     text-align: center;
 }
 
+.discover-toast {
+    text-align: center;
+    color: #ffd23f;
+    font-size: 16px;
+    height: 20px;
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.discover-toast.show {
+    opacity: 1;
+}
+
 .btnrow {
     display: flex;
     justify-content: center;
