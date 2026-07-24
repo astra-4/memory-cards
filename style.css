@@ -204,3 +204,10 @@ button:hover {
 .game {
     display: none;
 }
+
+.bestTimeLine {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}

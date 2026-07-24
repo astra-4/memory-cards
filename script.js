@@ -19,6 +19,10 @@ let order = [];
 let flippedCells = [];
 let matchedCells = [];
 let busy = false;
+let besttimes = {};
+let timerStarted = false;
+let timerInterval = null;
+let elapsedSeconds = 0;
 
 const boardE1 = document.getElementById("board");
 const levelText = document.getElementById("levelText");
@@ -33,6 +37,8 @@ const gameScreen = document.getElementById("gameScreen");
 const easyBtn = document.getElementById("easyBtn");
 const mediumBtn = document.getElementById("mediumBtn");
 const hardBtn = document.getElementById("hardBtn");
+const timerText = document.getElementById("timerText");
+const bestTimeText = document.getElementById("bestTimeText");
 
 function pairsForLevel(lvl) {
     return Math.min(lvl+1, SPRITE_URLS.length);
