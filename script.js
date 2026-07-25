@@ -55,7 +55,7 @@ const bestTimeText = document.getElementById("bestTimeText");
 const levelUpOverlay = document.getElementById("levelUpOverlay");
 const skinSwatches = document.querySelectorAll(".skinSwatch");
 const dexGrid = document.getElementById("dexGrid");
-const totalMatches = document.getElementById("totalMatchesText");
+const totalMatchesText = document.getElementById("totalMatchesText");
 const totalBoardsText = document.getElementById("totalBoardsText");
 
 function pairsForLevel(lvl) {
