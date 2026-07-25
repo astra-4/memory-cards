@@ -349,3 +349,10 @@ button:hover {
     color: #ffd23f;
     font-size: 14px;
 }
+
+.statsLine {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+}

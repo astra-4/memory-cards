@@ -32,6 +32,8 @@ let currentSkin = "red";
 let seenSprites = [];
 let focusedPos = 0;
 let isPaused = false;
+let totalMatches = 0;
+let totalBoardsCleared = 0;
 
 const boardE1 = document.getElementById("board");
 const levelText = document.getElementById("levelText");
@@ -53,6 +55,8 @@ const bestTimeText = document.getElementById("bestTimeText");
 const levelUpOverlay = document.getElementById("levelUpOverlay");
 const skinSwatches = document.querySelectorAll(".skinSwatch");
 const dexGrid = document.getElementById("dexGrid");
+const totalMatches = document.getElementById("totalMatchesText");
+const totalBoardsText = document.getElementById("totalBoardsText");
 
 function pairsForLevel(lvl) {
     return Math.min(lvl+1, SPRITE_URLS.length);
@@ -78,11 +82,13 @@ function loadProgress() {
         bestTimes = saved.bestTimes || {};
         currentSkin = saved.skin || "red";
         seenSprites = saved.seenSprites || [];
+        totalMatches = saved.totalMatches || 0;
+        totalBoardsCleared = saved.totalBoardsCleared || 0;
     }
 }
 
 function saveProgress() {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes, seenSprites, skin: currentSkin }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ level, exp, boardNum, bestTimes, seenSprites, skin: currentSkin, totalMatches, totalBoardsCleared }));
 }
 
 function shuffledOrder(pairs) {
@@ -135,6 +141,7 @@ function buildBoard() {
     renderDex();
     updateStats();
     updateBestTimeDisplay();
+    updateTotalStatsDisplay();
 }
 
 function startGame(startLevel) {
@@ -242,6 +249,11 @@ function updateStats() {
     expBarFill.style.width = pct + "%";
 }
 
+function updateTotalStatsDisplay() {
+    totalMatchesText.textContent = totalMatches;
+    totalBoardsText.textContent = totalBoardsCleared;
+}
+
 function moveFocus(dx, dy) {
     const cols = Math.ceil(Math.sqrt(order.length));
     const rows = Math.ceil(order.length / cols);
@@ -289,6 +301,7 @@ function handleCardClick(pos) {
     setTimeout(function () {
         if (isMatch) {
             matchedCells.push(a,b);
+            totalMatches++;
             const spriteIndex = order[a];
             if (!seenSprites.includes(spriteIndex)) {
                 seenSprites.push(spriteIndex);
@@ -310,6 +323,7 @@ function handleCardClick(pos) {
                 exp += 30;
                 levelUpIfReady();
                 boardNum++;
+                totalBoardsCleared++
                 msgEl.textContent = "Board cleared! New board unlocked.";
                 saveProgress();
                 flippedCells = [];
